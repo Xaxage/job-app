@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: jobapp
+  datasource:
+    url: jdbc:postgresql://localhost:5432/jobapp
+    username: xaxage
+    password: password
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    enabled: true
+  jooq:
+    sql-dialect: POSTGRES
