@@ -6,29 +6,20 @@ package com.xaxage.jobapp.generated.tables;
 
 import com.xaxage.jobapp.generated.Keys;
 import com.xaxage.jobapp.generated.Public;
+import com.xaxage.jobapp.generated.tables.Company.CompanyPath;
 import com.xaxage.jobapp.generated.tables.records.JobRecord;
-
-import java.math.BigDecimal;
-import java.time.OffsetDateTime;
-import java.util.Collection;
-import java.util.UUID;
-
-import org.jooq.Condition;
-import org.jooq.Field;
-import org.jooq.Name;
-import org.jooq.PlainSQL;
-import org.jooq.QueryPart;
-import org.jooq.SQL;
-import org.jooq.Schema;
-import org.jooq.Select;
-import org.jooq.Stringly;
-import org.jooq.Table;
-import org.jooq.TableField;
-import org.jooq.TableOptions;
-import org.jooq.UniqueKey;
+import org.jooq.*;
+import org.jooq.Record;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
+
+import java.math.BigDecimal;
+import java.time.OffsetDateTime;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.UUID;
 
 
 /**
@@ -92,6 +83,11 @@ public class Job extends TableImpl<JobRecord> {
      */
     public final TableField<JobRecord, OffsetDateTime> UPDATED_AT = createField(DSL.name("updated_at"), SQLDataType.TIMESTAMPWITHTIMEZONE(6).nullable(false), this, "");
 
+    /**
+     * The column <code>public.job.company_id</code>.
+     */
+    public final TableField<JobRecord, UUID> COMPANY_ID = createField(DSL.name("company_id"), SQLDataType.UUID.nullable(false), this, "");
+
     private Job(Name alias, Table<JobRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);
     }
@@ -121,6 +117,41 @@ public class Job extends TableImpl<JobRecord> {
         this(DSL.name("job"), null);
     }
 
+    public <O extends Record> Job(Table<O> path, ForeignKey<O, JobRecord> childPath, InverseForeignKey<O, JobRecord> parentPath) {
+        super(path, childPath, parentPath, JOB);
+    }
+
+    /**
+     * A subtype implementing {@link Path} for simplified path-based joins.
+     */
+    public static class JobPath extends Job implements Path<JobRecord> {
+
+        private static final long serialVersionUID = 1L;
+
+        public <O extends Record> JobPath(Table<O> path, ForeignKey<O, JobRecord> childPath, InverseForeignKey<O, JobRecord> parentPath) {
+            super(path, childPath, parentPath);
+        }
+
+        private JobPath(Name alias, Table<JobRecord> aliased) {
+            super(alias, aliased);
+        }
+
+        @Override
+        public JobPath as(String alias) {
+            return new JobPath(DSL.name(alias), this);
+        }
+
+        @Override
+        public JobPath as(Name alias) {
+            return new JobPath(alias, this);
+        }
+
+        @Override
+        public JobPath as(Table<?> alias) {
+            return new JobPath(alias.getQualifiedName(), this);
+        }
+    }
+
     @Override
     public Schema getSchema() {
         return aliased() ? null : Public.PUBLIC;
@@ -129,6 +160,23 @@ public class Job extends TableImpl<JobRecord> {
     @Override
     public UniqueKey<JobRecord> getPrimaryKey() {
         return Keys.JOB_PKEY;
+    }
+
+    @Override
+    public List<ForeignKey<JobRecord, ?>> getReferences() {
+        return Arrays.asList(Keys.JOB__JOB_COMPANY_ID_FKEY);
+    }
+
+    private transient CompanyPath _company;
+
+    /**
+     * Get the implicit join path to the <code>public.company</code> table.
+     */
+    public CompanyPath company() {
+        if (_company == null)
+            _company = new CompanyPath(this, Keys.JOB__JOB_COMPANY_ID_FKEY, null);
+
+        return _company;
     }
 
     @Override

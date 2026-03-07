@@ -15,4 +15,6 @@ public interface JobRepository {
     boolean existsById(UUID id);
 
     void deleteById(UUID id);
+
+    List<Job> findByCompanyId(UUID companyId);
 }

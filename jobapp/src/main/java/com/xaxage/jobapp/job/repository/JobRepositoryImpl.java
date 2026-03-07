@@ -5,7 +5,6 @@ import com.xaxage.jobapp.job.entity.Job;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
 
-import java.time.ZoneOffset;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,45 +12,47 @@ import static com.xaxage.jobapp.generated.Tables.JOB;
 
 @Repository
 public class JobRepositoryImpl implements JobRepository {
-    private final DSLContext dsl;
+    private final DSLContext context;
 
-    public JobRepositoryImpl(DSLContext dsl) {
-        this.dsl = dsl;
+    public JobRepositoryImpl(DSLContext context) {
+        this.context = context;
     }
 
     @Override
     public List<Job> findAll() {
-        return dsl.selectFrom(JOB)
+        return context.selectFrom(JOB)
                 .fetch()
                 .map(this::toJob);
     }
 
     @Override
     public Job save(Job job) {
-        dsl.insertInto(JOB)
+        context.insertInto(JOB)
                 .set(JOB.ID, job.getId())
+                .set(JOB.COMPANY_ID, job.getCompanyId())
                 .set(JOB.TITLE, job.getTitle())
                 .set(JOB.DESCRIPTION, job.getDescription())
                 .set(JOB.MIN_SALARY, job.getMinSalary())
                 .set(JOB.MAX_SALARY, job.getMaxSalary())
                 .set(JOB.LOCATION, job.getLocation())
-                .set(JOB.CREATED_AT, job.getCreatedAt().atOffset(ZoneOffset.UTC))
-                .set(JOB.UPDATED_AT, job.getUpdatedAt().atOffset(ZoneOffset.UTC))
+                .set(JOB.CREATED_AT, job.getCreatedAt())
+                .set(JOB.UPDATED_AT, job.getUpdatedAt())
                 .onConflict(JOB.ID)
                 .doUpdate()
+                .set(JOB.COMPANY_ID, job.getCompanyId())
                 .set(JOB.TITLE, job.getTitle())
                 .set(JOB.DESCRIPTION, job.getDescription())
                 .set(JOB.MIN_SALARY, job.getMinSalary())
                 .set(JOB.MAX_SALARY, job.getMaxSalary())
                 .set(JOB.LOCATION, job.getLocation())
-                .set(JOB.UPDATED_AT, job.getUpdatedAt().atOffset(ZoneOffset.UTC))
+                .set(JOB.UPDATED_AT, job.getUpdatedAt())
                 .execute();
         return job;
     }
 
     @Override
     public Job findById(UUID id) {
-        JobRecord record = dsl.selectFrom(JOB)
+        JobRecord record = context.selectFrom(JOB)
                 .where(JOB.ID.eq(id))
                 .fetchOne();
         return record == null ? null : toJob(record);
@@ -59,29 +60,38 @@ public class JobRepositoryImpl implements JobRepository {
 
     @Override
     public boolean existsById(UUID id) {
-        return dsl.fetchExists(
-                dsl.selectFrom(JOB)
+        return context.fetchExists(
+                context.selectFrom(JOB)
                         .where(JOB.ID.eq(id))
         );
     }
 
     @Override
     public void deleteById(UUID id) {
-        dsl.deleteFrom(JOB)
+        context.deleteFrom(JOB)
                 .where(JOB.ID.eq(id))
                 .execute();
+    }
+
+    @Override
+    public List<Job> findByCompanyId(UUID companyId) {
+        return context.selectFrom(JOB)
+                .where(JOB.COMPANY_ID.eq(companyId))
+                .fetch()
+                .map(this::toJob);
     }
 
     private Job toJob(JobRecord r) {
         return new Job(
                 r.getId(),
+                r.getCompanyId(),
                 r.getTitle(),
                 r.getDescription(),
                 r.getMinSalary(),
                 r.getMaxSalary(),
                 r.getLocation(),
-                r.getCreatedAt().toInstant(),
-                r.getUpdatedAt().toInstant()
+                r.getCreatedAt(),
+                r.getUpdatedAt()
         );
     }
 }

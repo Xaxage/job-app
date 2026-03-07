@@ -4,14 +4,14 @@
 package com.xaxage.jobapp.generated;
 
 
+import com.xaxage.jobapp.generated.tables.Company;
 import com.xaxage.jobapp.generated.tables.Job;
-
-import java.util.Arrays;
-import java.util.List;
-
 import org.jooq.Catalog;
 import org.jooq.Table;
 import org.jooq.impl.SchemaImpl;
+
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -26,6 +26,11 @@ public class Public extends SchemaImpl {
      * The reference instance of <code>public</code>
      */
     public static final Public PUBLIC = new Public();
+
+    /**
+     * The table <code>public.company</code>.
+     */
+    public final Company COMPANY = Company.COMPANY;
 
     /**
      * The table <code>public.job</code>.
@@ -48,6 +53,7 @@ public class Public extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
+                Company.COMPANY,
             Job.JOB
         );
     }

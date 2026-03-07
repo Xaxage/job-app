@@ -5,14 +5,16 @@ import java.util.UUID;
 
 public class JobResponse {
     private UUID id;
+    private UUID companyId;
     private String title;
     private String description;
     private BigDecimal minSalary;
     private BigDecimal maxSalary;
     private String location;
 
-    public JobResponse(UUID id, String title, String description, BigDecimal minSalary, BigDecimal maxSalary, String location) {
+    public JobResponse(UUID id, UUID companyId, String title, String description, BigDecimal minSalary, BigDecimal maxSalary, String location) {
         this.id = id;
+        this.companyId = companyId;
         this.title = title;
         this.description = description;
         this.minSalary = minSalary;
@@ -26,6 +28,14 @@ public class JobResponse {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public UUID getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(UUID companyId) {
+        this.companyId = companyId;
     }
 
     public String getTitle() {

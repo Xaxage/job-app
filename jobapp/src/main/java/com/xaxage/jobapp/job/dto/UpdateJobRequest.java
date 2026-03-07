@@ -1,20 +1,31 @@
 package com.xaxage.jobapp.job.dto;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 public class UpdateJobRequest {
+    private UUID companyId;
     private String title;
     private String description;
     private BigDecimal minSalary;
     private BigDecimal maxSalary;
     private String location;
 
-    public UpdateJobRequest(String title, String description, BigDecimal minSalary, BigDecimal maxSalary, String location) {
+    public UpdateJobRequest(UUID companyId, String title, String description, BigDecimal minSalary, BigDecimal maxSalary, String location) {
+        this.companyId = companyId;
         this.title = title;
         this.description = description;
         this.minSalary = minSalary;
         this.maxSalary = maxSalary;
         this.location = location;
+    }
+
+    public UUID getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(UUID companyId) {
+        this.companyId = companyId;
     }
 
     public String getTitle() {

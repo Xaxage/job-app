@@ -1,21 +1,23 @@
 package com.xaxage.jobapp.job.entity;
 
 import java.math.BigDecimal;
-import java.time.Instant;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 public class Job {
     private UUID id;
+    private UUID companyId;
     private String title;
     private String description;
     private BigDecimal minSalary;
     private BigDecimal maxSalary;
     private String location;
-    private Instant createdAt;
-    private Instant updatedAt;
+    private OffsetDateTime createdAt;
+    private OffsetDateTime updatedAt;
 
-    public Job(UUID id, String title, String description, BigDecimal minSalary, BigDecimal maxSalary, String location, Instant createdAt, Instant updatedAt) {
+    public Job(UUID id, UUID companyId, String title, String description, BigDecimal minSalary, BigDecimal maxSalary, String location, OffsetDateTime createdAt, OffsetDateTime updatedAt) {
         this.id = id;
+        this.companyId = companyId;
         this.title = title;
         this.description = description;
         this.minSalary = minSalary;
@@ -31,6 +33,14 @@ public class Job {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public UUID getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(UUID companyId) {
+        this.companyId = companyId;
     }
 
     public String getTitle() {
@@ -73,19 +83,19 @@ public class Job {
         this.location = location;
     }
 
-    public Instant getCreatedAt() {
+    public OffsetDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Instant createdAt) {
+    public void setCreatedAt(OffsetDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Instant getUpdatedAt() {
+    public OffsetDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Instant updatedAt) {
+    public void setUpdatedAt(OffsetDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 }

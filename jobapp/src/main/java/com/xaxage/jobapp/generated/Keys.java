@@ -4,9 +4,11 @@
 package com.xaxage.jobapp.generated;
 
 
+import com.xaxage.jobapp.generated.tables.Company;
 import com.xaxage.jobapp.generated.tables.Job;
+import com.xaxage.jobapp.generated.tables.records.CompanyRecord;
 import com.xaxage.jobapp.generated.tables.records.JobRecord;
-
+import org.jooq.ForeignKey;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
@@ -24,5 +26,12 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final UniqueKey<CompanyRecord> COMPANY_PKEY = Internal.createUniqueKey(Company.COMPANY, DSL.name("company_pkey"), new TableField[]{Company.COMPANY.ID}, true);
     public static final UniqueKey<JobRecord> JOB_PKEY = Internal.createUniqueKey(Job.JOB, DSL.name("job_pkey"), new TableField[] { Job.JOB.ID }, true);
+
+    // -------------------------------------------------------------------------
+    // FOREIGN KEY definitions
+    // -------------------------------------------------------------------------
+
+    public static final ForeignKey<JobRecord, CompanyRecord> JOB__JOB_COMPANY_ID_FKEY = Internal.createForeignKey(Job.JOB, DSL.name("job_company_id_fkey"), new TableField[]{Job.JOB.COMPANY_ID}, Keys.COMPANY_PKEY, new TableField[]{Company.COMPANY.ID}, true);
 }

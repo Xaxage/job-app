@@ -4,6 +4,7 @@
 package com.xaxage.jobapp.generated;
 
 
+import com.xaxage.jobapp.generated.tables.Company;
 import com.xaxage.jobapp.generated.tables.Job;
 
 
@@ -12,6 +13,11 @@ import com.xaxage.jobapp.generated.tables.Job;
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
+
+    /**
+     * The table <code>public.company</code>.
+     */
+    public static final Company COMPANY = Company.COMPANY;
 
     /**
      * The table <code>public.job</code>.

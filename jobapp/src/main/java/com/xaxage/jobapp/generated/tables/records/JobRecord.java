@@ -5,13 +5,12 @@ package com.xaxage.jobapp.generated.tables.records;
 
 
 import com.xaxage.jobapp.generated.tables.Job;
+import org.jooq.Record1;
+import org.jooq.impl.UpdatableRecordImpl;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
-
-import org.jooq.Record1;
-import org.jooq.impl.UpdatableRecordImpl;
 
 
 /**
@@ -134,6 +133,20 @@ public class JobRecord extends UpdatableRecordImpl<JobRecord> {
         return (OffsetDateTime) get(7);
     }
 
+    /**
+     * Setter for <code>public.job.company_id</code>.
+     */
+    public void setCompanyId(UUID value) {
+        set(8, value);
+    }
+
+    /**
+     * Getter for <code>public.job.company_id</code>.
+     */
+    public UUID getCompanyId() {
+        return (UUID) get(8);
+    }
+
     // -------------------------------------------------------------------------
     // Primary key information
     // -------------------------------------------------------------------------
@@ -157,7 +170,7 @@ public class JobRecord extends UpdatableRecordImpl<JobRecord> {
     /**
      * Create a detached, initialised JobRecord
      */
-    public JobRecord(UUID id, String title, String description, BigDecimal minSalary, BigDecimal maxSalary, String location, OffsetDateTime createdAt, OffsetDateTime updatedAt) {
+    public JobRecord(UUID id, String title, String description, BigDecimal minSalary, BigDecimal maxSalary, String location, OffsetDateTime createdAt, OffsetDateTime updatedAt, UUID companyId) {
         super(Job.JOB);
 
         setId(id);
@@ -168,6 +181,7 @@ public class JobRecord extends UpdatableRecordImpl<JobRecord> {
         setLocation(location);
         setCreatedAt(createdAt);
         setUpdatedAt(updatedAt);
+        setCompanyId(companyId);
         resetChangedOnNotNull();
     }
 }

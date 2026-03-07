@@ -27,7 +27,7 @@ public class JobController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<JobResponse> findAll(@PathVariable UUID id) {
+    public ResponseEntity<JobResponse> findById(@PathVariable UUID id) {
         var job = jobService.findJobById(id);
         return new ResponseEntity<>(job, HttpStatus.OK);
     }

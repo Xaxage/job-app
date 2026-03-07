@@ -10,7 +10,7 @@ import com.xaxage.jobapp.job.entity.Job;
 import com.xaxage.jobapp.job.repository.JobRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,9 +34,12 @@ public class JobServiceImpl implements JobService {
     @Override
     public JobResponse createJob(CreateJobRequest request) {
         Job job = jobMapper.toEntity(request);
+        OffsetDateTime now = OffsetDateTime.now();
+
         job.setId(UuidCreator.getTimeOrderedEpoch());
-        job.setCreatedAt(Instant.now());
-        job.setUpdatedAt(Instant.now());
+        job.setCreatedAt(now);
+        job.setUpdatedAt(now);
+
         Job savedJob = jobRepository.save(job);
         return jobMapper.toResponse(savedJob);
     }
@@ -62,7 +65,7 @@ public class JobServiceImpl implements JobService {
         Job existingJob = jobRepository.findById(jobId);
 
         jobMapper.updateEntity(request, existingJob);
-        existingJob.setUpdatedAt(Instant.now());
+        existingJob.setUpdatedAt(OffsetDateTime.now());
 
         Job saved = jobRepository.save(existingJob);
         return jobMapper.toResponse(saved);
