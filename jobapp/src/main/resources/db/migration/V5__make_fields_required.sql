@@ -1,0 +1,9 @@
+ALTER TABLE job
+    ALTER COLUMN description SET NOT NULL,
+    ALTER COLUMN location SET NOT NULL,
+    ALTER COLUMN min_salary SET NOT NULL,
+    ALTER COLUMN max_salary SET NOT NULL;
+
+ALTER TABLE review
+    ALTER COLUMN description SET NOT NULL,
+    ALTER COLUMN rating SET NOT NULL;

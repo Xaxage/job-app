@@ -1,6 +1,7 @@
 package com.xaxage.jobapp.company.entity;
 
 import com.xaxage.jobapp.job.entity.Job;
+import com.xaxage.jobapp.review.entity.Review;
 
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -11,6 +12,7 @@ public class Company {
     private String name;
     private String description;
     private List<Job> jobs;
+    private List<Review> reviews;
     private OffsetDateTime createdAt;
     private OffsetDateTime updatedAt;
 
@@ -52,6 +54,14 @@ public class Company {
 
     public void setJobs(List<Job> jobs) {
         this.jobs = jobs;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 
     public OffsetDateTime getCreatedAt() {

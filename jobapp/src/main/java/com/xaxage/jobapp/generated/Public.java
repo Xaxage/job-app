@@ -6,6 +6,7 @@ package com.xaxage.jobapp.generated;
 
 import com.xaxage.jobapp.generated.tables.Company;
 import com.xaxage.jobapp.generated.tables.Job;
+import com.xaxage.jobapp.generated.tables.Review;
 import org.jooq.Catalog;
 import org.jooq.Table;
 import org.jooq.impl.SchemaImpl;
@@ -38,6 +39,11 @@ public class Public extends SchemaImpl {
     public final Job JOB = Job.JOB;
 
     /**
+     * The table <code>public.review</code>.
+     */
+    public final Review REVIEW = Review.REVIEW;
+
+    /**
      * No further instances allowed
      */
     private Public() {
@@ -54,7 +60,8 @@ public class Public extends SchemaImpl {
     public final List<Table<?>> getTables() {
         return Arrays.asList(
                 Company.COMPANY,
-            Job.JOB
+                Job.JOB,
+                Review.REVIEW
         );
     }
 }

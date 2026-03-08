@@ -7,6 +7,7 @@ package com.xaxage.jobapp.generated.tables;
 import com.xaxage.jobapp.generated.Keys;
 import com.xaxage.jobapp.generated.Public;
 import com.xaxage.jobapp.generated.tables.Job.JobPath;
+import com.xaxage.jobapp.generated.tables.Review.ReviewPath;
 import com.xaxage.jobapp.generated.tables.records.CompanyRecord;
 import org.jooq.*;
 import org.jooq.Record;
@@ -104,11 +105,9 @@ public class Company extends TableImpl<CompanyRecord> {
     public static class CompanyPath extends Company implements Path<CompanyRecord> {
 
         private static final long serialVersionUID = 1L;
-
         public <O extends Record> CompanyPath(Table<O> path, ForeignKey<O, CompanyRecord> childPath, InverseForeignKey<O, CompanyRecord> parentPath) {
             super(path, childPath, parentPath);
         }
-
         private CompanyPath(Name alias, Table<CompanyRecord> aliased) {
             super(alias, aliased);
         }
@@ -149,6 +148,19 @@ public class Company extends TableImpl<CompanyRecord> {
             _job = new JobPath(this, null, Keys.JOB__JOB_COMPANY_ID_FKEY.getInverseKey());
 
         return _job;
+    }
+
+    private transient ReviewPath _review;
+
+    /**
+     * Get the implicit to-many join path to the <code>public.review</code>
+     * table
+     */
+    public ReviewPath review() {
+        if (_review == null)
+            _review = new ReviewPath(this, null, Keys.REVIEW__REVIEW_COMPANY_ID_FKEY.getInverseKey());
+
+        return _review;
     }
 
     @Override

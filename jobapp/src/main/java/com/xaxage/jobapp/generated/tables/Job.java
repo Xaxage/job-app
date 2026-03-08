@@ -56,22 +56,22 @@ public class Job extends TableImpl<JobRecord> {
     /**
      * The column <code>public.job.description</code>.
      */
-    public final TableField<JobRecord, String> DESCRIPTION = createField(DSL.name("description"), SQLDataType.CLOB, this, "");
+    public final TableField<JobRecord, String> DESCRIPTION = createField(DSL.name("description"), SQLDataType.CLOB.nullable(false), this, "");
 
     /**
      * The column <code>public.job.min_salary</code>.
      */
-    public final TableField<JobRecord, BigDecimal> MIN_SALARY = createField(DSL.name("min_salary"), SQLDataType.NUMERIC(19, 2), this, "");
+    public final TableField<JobRecord, BigDecimal> MIN_SALARY = createField(DSL.name("min_salary"), SQLDataType.NUMERIC(19, 2).nullable(false), this, "");
 
     /**
      * The column <code>public.job.max_salary</code>.
      */
-    public final TableField<JobRecord, BigDecimal> MAX_SALARY = createField(DSL.name("max_salary"), SQLDataType.NUMERIC(19, 2), this, "");
+    public final TableField<JobRecord, BigDecimal> MAX_SALARY = createField(DSL.name("max_salary"), SQLDataType.NUMERIC(19, 2).nullable(false), this, "");
 
     /**
      * The column <code>public.job.location</code>.
      */
-    public final TableField<JobRecord, String> LOCATION = createField(DSL.name("location"), SQLDataType.VARCHAR(255), this, "");
+    public final TableField<JobRecord, String> LOCATION = createField(DSL.name("location"), SQLDataType.VARCHAR(255).nullable(false), this, "");
 
     /**
      * The column <code>public.job.created_at</code>.
@@ -127,11 +127,9 @@ public class Job extends TableImpl<JobRecord> {
     public static class JobPath extends Job implements Path<JobRecord> {
 
         private static final long serialVersionUID = 1L;
-
         public <O extends Record> JobPath(Table<O> path, ForeignKey<O, JobRecord> childPath, InverseForeignKey<O, JobRecord> parentPath) {
             super(path, childPath, parentPath);
         }
-
         private JobPath(Name alias, Table<JobRecord> aliased) {
             super(alias, aliased);
         }

@@ -1,8 +1,16 @@
+buildscript {
+    dependencies {
+        classpath("org.postgresql:postgresql:42.7.10")
+        classpath("org.flywaydb:flyway-database-postgresql:11.14.1")
+    }
+}
+
 plugins {
     java
     id("org.springframework.boot") version "4.0.3"
     id("io.spring.dependency-management") version "1.1.7"
     id("org.jooq.jooq-codegen-gradle") version "3.19.30"
+    id("org.flywaydb.flyway") version "11.14.1"
 }
 
 group = "com.xaxage"
@@ -18,6 +26,7 @@ java {
 repositories {
     mavenCentral()
 }
+
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webmvc")
@@ -40,6 +49,12 @@ tasks.named("jooqCodegen") {
     }
 }
 
+flyway {
+    url = property("db.url") as String
+    user = property("db.user") as String
+    password = property("db.password") as String
+    driver = "org.postgresql.Driver"
+}
 
 jooq {
     configuration {

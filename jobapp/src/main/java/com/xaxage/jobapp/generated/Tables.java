@@ -6,6 +6,7 @@ package com.xaxage.jobapp.generated;
 
 import com.xaxage.jobapp.generated.tables.Company;
 import com.xaxage.jobapp.generated.tables.Job;
+import com.xaxage.jobapp.generated.tables.Review;
 
 
 /**
@@ -23,4 +24,9 @@ public class Tables {
      * The table <code>public.job</code>.
      */
     public static final Job JOB = Job.JOB;
+
+    /**
+     * The table <code>public.review</code>.
+     */
+    public static final Review REVIEW = Review.REVIEW;
 }

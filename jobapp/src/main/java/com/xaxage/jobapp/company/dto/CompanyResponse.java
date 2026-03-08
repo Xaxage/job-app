@@ -1,6 +1,7 @@
 package com.xaxage.jobapp.company.dto;
 
 import com.xaxage.jobapp.job.dto.JobResponse;
+import com.xaxage.jobapp.review.dto.ReviewResponse;
 
 import java.util.List;
 import java.util.UUID;
@@ -10,12 +11,14 @@ public class CompanyResponse {
     private String name;
     private String description;
     private List<JobResponse> jobs;
+    private List<ReviewResponse> reviews;
 
     public CompanyResponse(UUID id, String name, String description, List<JobResponse> jobs) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.jobs = jobs;
+        this.reviews = reviews;
     }
 
     public UUID getId() {
@@ -48,5 +51,13 @@ public class CompanyResponse {
 
     public void setJobs(List<JobResponse> jobs) {
         this.jobs = jobs;
+    }
+
+    public List<ReviewResponse> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<ReviewResponse> reviews) {
+        this.reviews = reviews;
     }
 }

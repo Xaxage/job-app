@@ -5,6 +5,7 @@ import com.xaxage.jobapp.company.dto.CreateCompanyRequest;
 import com.xaxage.jobapp.company.dto.UpdateCompanyRequest;
 import com.xaxage.jobapp.company.entity.Company;
 import com.xaxage.jobapp.job.JobMapper;
+import com.xaxage.jobapp.review.ReviewMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -12,8 +13,7 @@ import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.WARN, uses = {JobMapper.class})
-
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.WARN, uses = {JobMapper.class, ReviewMapper.class})
 public interface CompanyMapper {
 
     @Mapping(target = "id", ignore = true)
