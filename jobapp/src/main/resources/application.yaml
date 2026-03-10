@@ -10,3 +10,14 @@ spring:
     enabled: true
   jooq:
     sql-dialect: POSTGRES
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+    info:
+      access: unrestricted
